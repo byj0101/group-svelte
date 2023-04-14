@@ -1,129 +1,118 @@
-<script>
-	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
+<script lang="ts">
+  import logoImage from "$lib/images/group_logo_gray.png";
+  import { darkMode } from "$lib/store";
+  //   import { t } from "$lib/translations";
+  // // import {
+  // // 	Navbar,
+  // // 	NavbarBrand,
+  // // 	Nav,
+  // // 	NavItem,
+  // // 	NavLink,
+  // // 	Dropdown,
+  // // 	DropdownToggle,
+  // // 	DropdownMenu,
+  // // 	DropdownItem,
+  // // 	FormGroup,
+  // // 	Input,
+  // // 	Button
+  // } from "sveltestrap";
+  function toggle() {
+    window.document.body.classList.toggle("dark-mode");
+    darkMode.update((value) => !value);
+  }
 </script>
 
-<header>
-	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
+<!-- <header>
+	<div class="nav-bar">
+		<Navbar class="nav-bar-sec dark-container" light expand="md">
+			<NavbarBrand href="/"
+				><img class="main-logo" src={logoImage} alt="logo" /></NavbarBrand
+			>
+			<Nav class="nav-input flc jcc" navbar>
+				<FormGroup>
+					<Input
+						class="mb-none"
+						type="search"
+						name="search"
+						placeholder={$t("layout.placeholder.search")}
+					/>
+				</FormGroup>
+				<Dropdown nav inNavbar>
+					<DropdownToggle nav caret>{$t("layout.writing")}</DropdownToggle>
+					<DropdownMenu end>
+						<DropdownItem>{$t("layout.dropDown.write")}</DropdownItem>
+						<DropdownItem divider />
+						<DropdownItem>{$t("layout.dropDown.picture")}</DropdownItem>
+						<DropdownItem divider />
+						<DropdownItem>{$t("layout.dropDown.video")}</DropdownItem>
+					</DropdownMenu>
+				</Dropdown>
+				<NavItem>
+					<NavLink href="sign_in">{$t("layout.logIn")}</NavLink>
+				</NavItem>
+				<Button on:click={toggle}>다크모드</Button>
+			</Nav>
+		</Navbar>
 	</div>
+</header> -->
+<header class="p-3 nav-bar text-bg-dark">
+  <div class="container">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+      <a
+        href="/"
+        class="d-flex align-items-center mr-2 mb-2 mb-lg-0 text-white text-decoration-none"
+      >
+        <img class="main-logo" src={logoImage} alt="logo" />
+      </a>
 
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">About</a>
-			</li>
-			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
-			</li>
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
-	</nav>
+      <ul
+        class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+      />
 
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
-		</a>
-	</div>
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <input
+          type="search"
+          class="form-control form-control-dark text-bg-dark"
+          placeholder="검색어를 입력하세요"
+          aria-label="Search"
+        />
+      </form>
+
+      <div class="text-end">
+        <button type="button" class="btn btn-outline-light me-2"
+          >{"글쓰기"}</button
+        >
+        <button type="button" class="btn btn-primary me-2">{"로그인"}</button>
+        <button type="button" on:click={toggle} class="btn btn-secondary"
+          >다크모드</button
+        >
+      </div>
+    </div>
+  </div>
 </header>
 
 <style>
-	header {
-		display: flex;
-		justify-content: space-between;
-	}
+  .main-logo {
+    cursor: pointer;
+    width: 120px;
+    margin-top: 10px;
+  }
 
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
+  .nav-bar {
+    background-color: #272728 !important;
+    border: 1px solid #3c3c43 !important;
+    padding: 5px 20px;
+    width: 100%;
+  }
 
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
-	}
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li[aria-current='page']::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--color-theme-1);
-	}
+  :global(body) {
+    background-color: #ffffff;
+    color: #0084f6;
+  }
+  :global(body.dark-mode) {
+    background-color: #181819;
+    color: #bfc2c7;
+  }
 </style>
